@@ -1,0 +1,319 @@
+{
+	"compiler": {
+		"version": "0.8.22+commit.4fc1097e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "contract IPolygonZkEVMBridge",
+						"name": "_polygonZkEVMBridge",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_counterpartContract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_counterpartNetwork",
+						"type": "uint32"
+					},
+					{
+						"internalType": "contract IERC20",
+						"name": "_token",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "destinationAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "BridgeTokens",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "destinationAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "ClaimTokens",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "destinationAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "forceUpdateGlobalExitRoot",
+						"type": "bool"
+					}
+				],
+				"name": "bridgeToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "counterpartContract",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "counterpartNetwork",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "originAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint32",
+						"name": "originNetwork",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "onMessageReceived",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "polygonZkEVMBridge",
+				"outputs": [
+					{
+						"internalType": "contract IPolygonZkEVMBridge",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token",
+				"outputs": [
+					{
+						"internalType": "contract IERC20",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"events": {
+				"BridgeTokens(address,uint256)": {
+					"details": "Emitted when bridge tokens to the counterpart network"
+				},
+				"ClaimTokens(address,uint256)": {
+					"details": "Emitted when claim tokens from the counterpart network"
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"bridgeToken(address,uint256,bool)": {
+					"params": {
+						"amount": "Token amount",
+						"destinationAddress": "Address destination that will receive the tokens on the other network",
+						"forceUpdateGlobalExitRoot": "Indicates if the global exit root is updated or not"
+					}
+				},
+				"constructor": {
+					"params": {
+						"_counterpartContract": "Couterpart contract",
+						"_counterpartNetwork": "Couterpart network",
+						"_polygonZkEVMBridge": "Polygon zkevm bridge address",
+						"_token": "Token address"
+					}
+				},
+				"onMessageReceived(address,uint32,bytes)": {
+					"params": {
+						"data": "Abi encoded metadata",
+						"originAddress": "Origin address that the message was sended",
+						"originNetwork": "Origin network that the message was sended ( not usefull for this contract)"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"bridgeToken(address,uint256,bool)": {
+					"notice": "Send a message to the bridge that contains the destination address and the token amount The parent contract should implement the receive token protocol and afterwards call this function"
+				},
+				"onMessageReceived(address,uint32,bytes)": {
+					"notice": "Function triggered by the bridge once a message is received by the other network"
+				}
+			},
+			"notice": "ERC20BridgeNativeChain is an example contract to use the message layer of the PolygonZkEVMBridge to bridge custom ERC20 This contract will be deployed on the native erc20 network (usually will be mainnet)",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ERC20BridgeNativeChain.sol": "ERC20BridgeNativeChain"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol": {
+			"keccak256": "0xf41ca991f30855bf80ffd11e9347856a517b977f0a6c2d52e6421a99b7840329",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b2717fd2bdac99daa960a6de500754ea1b932093c946388c381da48658234b95",
+				"dweb:/ipfs/QmP6QVMn6UeA3ByahyJbYQr5M6coHKBKsf3ySZSfbyA8R7"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+			"keccak256": "0x9b72f93be69ca894d8492c244259615c4a742afc8d63720dbc8bb81087d9b238",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f5a7b96e511be78d5cdf635c784e6ab8cdd38625bb8cafb8a80914a1c89cf0f6",
+				"dweb:/ipfs/QmVzTCwJxQAkjRQHboT5QrvsVJGWQHgfEjeTbvyxoKBrds"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0xf96f969e24029d43d0df89e59d365f277021dac62b48e1c1e3ebe0acdd7f1ca1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ec772b45a624be516f1c81970caa8a2e144301e9d0921cbc1a2789fef39a1269",
+				"dweb:/ipfs/QmNyjwxCrGhQMyzLD93oUobJXVe9ceJvRvfXwbEtuxPiEj"
+			]
+		},
+		"ERC20BridgeNativeChain.sol": {
+			"keccak256": "0x45e0dea3ec0034d3ad30314c137a83eb45279075ef69af9b79ff1f5ba728e13b",
+			"license": "AGPL-3.0",
+			"urls": [
+				"bzz-raw://fa01c5aab2a701f6d04195848500689f65dad04bd4b2df1f3c8001b3907a53d5",
+				"dweb:/ipfs/Qma5ypdQmsrcBCQe8nNYZEEhncX2WEo5gmBZC1Q358giXZ"
+			]
+		},
+		"base/PolygonBridgeBase.sol": {
+			"keccak256": "0x6a3fce5147c0f5b16477863c66c89086bc5f59e9a5b43005be4dfc2f3dcb5b4a",
+			"license": "AGPL-3.0",
+			"urls": [
+				"bzz-raw://faa106435327209506f276b94463cc627c5ec80bc539f60c6a11c1188af340ac",
+				"dweb:/ipfs/QmXV5Qbx2dAFaDL19Lz5oUQRPG388mfqSFR3XBGdWgmY56"
+			]
+		},
+		"base/PolygonERC20BridgeBase.sol": {
+			"keccak256": "0x3bcfa7687dff32c1efc67ad0acaa228b54eea5455161ae31f6ed60a1f4b8d765",
+			"license": "AGPL-3.0",
+			"urls": [
+				"bzz-raw://2f48140851c16ba7c399835ea4222de10919265f5774461a42eceaa454b98faf",
+				"dweb:/ipfs/QmbH1mLrjL8v7JtyXALKP4RjaSv4XXAATebwzsHtN79UVG"
+			]
+		},
+		"polygonZKEVMContracts/interfaces/IBasePolygonZkEVMGlobalExitRoot.sol": {
+			"keccak256": "0x11812b6c81c5d9812bdf7061259a19f256787cac6e5e10d16e70e7dcfb3fb162",
+			"license": "AGPL-3.0",
+			"urls": [
+				"bzz-raw://91723a9303c7f7540abab3dc7440ec6d492603b8aa026a8ab1acd35d96e83b38",
+				"dweb:/ipfs/QmQq4Xr9zq2dprZpWBwbiDmPTa66bVxdjSWZn3FmYkneHm"
+			]
+		},
+		"polygonZKEVMContracts/interfaces/IBridgeMessageReceiver.sol": {
+			"keccak256": "0x0903661a6226549f4238d79d98615f7d2ec0a907869d6a44bff3cdef110e51e0",
+			"license": "AGPL-3.0",
+			"urls": [
+				"bzz-raw://65ef0ed2c6dc6aa8450c580f7707cb2827881b5a206a77ef6f6310ed65633406",
+				"dweb:/ipfs/QmSYZL3rqBKEdH1Kfv22dFonYVDKP29K1rbS4hfYj5TEsU"
+			]
+		},
+		"polygonZKEVMContracts/interfaces/IPolygonZkEVMBridge.sol": {
+			"keccak256": "0x999173f036bac0310b029b915afea1428b0f6bd4378a42d8f6388506b38a87ce",
+			"license": "AGPL-3.0",
+			"urls": [
+				"bzz-raw://9c2aa4131d2b3d61a5dfc0310d2e45147cddb415a3f4bcad76d0c08fe9e1309c",
+				"dweb:/ipfs/QmcnCSwtt73icEvg57KZfVZqeajRBNnGRb4rQM6EMJrkRZ"
+			]
+		}
+	},
+	"version": 1
+}
